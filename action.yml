@@ -1,0 +1,95 @@
+name: "AI Code Review Action"
+description: "Performs comprehensive AI-powered code review on pull requests with detailed feedback and suggestions"
+author: "AI Code Review Team"
+
+inputs:
+  github-token:
+    description: "GitHub token for API access"
+    required: true
+    default: ${{ github.token }}
+  
+  openai-api-key:
+    description: "OpenAI API key for AI-powered code review"
+    required: false
+  
+  anthropic-api-key:
+    description: "Anthropic API key for AI-powered code review (alternative to OpenAI)"
+    required: false
+  
+  openrouter-api-key:
+    description: "OpenRouter API key for AI-powered code review (supports multiple models)"
+    required: false
+  
+  ai-provider:
+    description: "AI provider to use (openai, anthropic, openrouter)"
+    required: false
+    default: "openai"
+  
+  model:
+    description: "AI model to use for code review. For OpenRouter: use model names like 'anthropic/claude-3-sonnet', 'openai/gpt-4', 'meta-llama/llama-3-70b-instruct', etc."
+    required: false
+    default: "gpt-4"
+  
+  openrouter-base-url:
+    description: "OpenRouter base URL (usually https://openrouter.ai/api/v1)"
+    required: false
+    default: "https://openrouter.ai/api/v1"
+  
+  max-files:
+    description: "Maximum number of files to review"
+    required: false
+    default: "20"
+  
+  exclude-patterns:
+    description: "Comma-separated list of file patterns to exclude from review"
+    required: false
+    default: "*.lock,*.min.js,*.map,node_modules/**,dist/**,build/**"
+  
+  review-level:
+    description: "Review level (basic, standard, detailed)"
+    required: false
+    default: "standard"
+  
+  language-hints:
+    description: "Programming languages in the project (auto-detected if not provided)"
+    required: false
+  
+  custom-prompts:
+    description: "Custom review prompts (JSON format)"
+    required: false
+  
+  enable-security-review:
+    description: "Enable security-focused code review"
+    required: false
+    default: "true"
+  
+  enable-performance-review:
+    description: "Enable performance-focused code review"
+    required: false
+    default: "true"
+  
+  enable-best-practices:
+    description: "Enable best practices review"
+    required: false
+    default: "true"
+
+outputs:
+  review-summary:
+    description: "Summary of the code review"
+  
+  issues-found:
+    description: "Number of issues found"
+  
+  files-reviewed:
+    description: "Number of files reviewed"
+  
+  review-url:
+    description: "URL to the review comment"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
+
+branding:
+  icon: "eye"
+  color: "purple"
