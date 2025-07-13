@@ -1,5 +1,5 @@
 name: "AI Code Review Action"
-description: "Performs comprehensive AI-powered code review on pull requests with detailed feedback and suggestions"
+description: "AI-powered code review for pull requests with inline comments, security, performance, and best-practices analysis"
 author: "AI Code Review Team"
 
 inputs:
